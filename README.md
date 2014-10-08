@@ -75,7 +75,7 @@ function Dashboard(config){
 
 	// here we choose mexport.module or mexport.render
 	// depending on if the component is auto-updating
-	dashboard.render = mexport.module(dashboard)
+	dashboard.render = mexport(dashboard)
 
 	return dashboard
 }
