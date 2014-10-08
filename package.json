@@ -1,6 +1,6 @@
 {
   "name": "mithril-export",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Append self contained mithril views to normal DOM elements",
   "main": "index.js",
   "scripts": {
