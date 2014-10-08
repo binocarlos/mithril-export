@@ -9,7 +9,7 @@ Append self contained [mithril](https://github.com/lhorie/mithril.js) views to n
 $ npm install mithril-export --save
 ```
 
-## usage
+## usage without
 
 Take this simple mithril module that is to be packaged with [browserify](https://github.com/substack/node-browserify):
 
@@ -47,9 +47,11 @@ var dashboard = Dashboard({
 m.module(document.body, dashboard);
 ```
 
-But this requires the top level app to know about mithril and reduces the dashboard modules portability.
+But this requires the top level app to know about mithril and reduces the dashboard modules portability to other applications that want to use it but have not installed mithril.
 
-Using `mithril-export` we create a utility `export` function to hide mithril from the top level app:
+## usage with
+
+Using `mithril-export` we create a utility `render` function to hide mithril from the top level app:
 
 ```js
 var EventEmitter = require('events').EventEmitter
@@ -69,7 +71,9 @@ function Dashboard(config){
 		return m("h1", vm.greeting);
 	};
 
-	dashboard.appendTo = mexport.module(dashboard)
+	// here we choose mexport.module or mexport.render
+	// depending on if the component is auto-updating
+	dashboard.render = mexport.module(dashboard)
 
 	return dashboard
 }
@@ -86,22 +90,20 @@ var dashboard = Dashboard({
 	summary:true
 })
 
-dashboard.appendTo(document.body)
+dashboard.render(document.body)
 ```
 
 ## api
 
-##### `var fn = mexport.module(component)`
+##### `var fn = mexport(mithrilModule)`
 
-Generate an `appendTo` function from a mithril module.
+Generate a function that will render a mithril module to the passed DOM element.
 
-A module is any object with a `view` and `controller` property.
-
-The appendTo function accepts the DOM node that the mithril component will be added to.
+A mithril module is an object that has both controller and view properties.
 
 ##### `var fn = mexport.render(component)`
 
-The same as the module but calls mithrils `render` method which only draws once.
+The same as the module method but that calls the mithril `render` method which only draws once.
 
 ## license
 

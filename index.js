@@ -1,13 +1,11 @@
 var m = require('mithril')
-module.exports = {
-	module:function(mod){
-		return function(elem){
-			m.module(elem, mod)
-		}
-	},
-	render:function(mod){
-		return function(elem){
-			m.render(elem, mod)
-		}
+module.exports = function(mod){
+	return function(elem){
+		m.module(elem, mod)
+	}
+}
+module.exports.render = function(mod){
+	return function(elem){
+		m.render(elem, mod)
 	}
 }

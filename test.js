@@ -4,33 +4,47 @@ var mexport = require('./')
 var test = require('tape');
 
 function Dashboard(config){
-	var dashboard = new EventEmitter()
-
-	var vm = {}
+	var dashboard = {}
 
 	dashboard.controller = function() {
-	    vm.greeting = "Hello";
+		this.val = config.test
 	};
 
-	dashboard.view = function(vm) {
-		return m("h1", vm.greeting);
+	dashboard.view = function(ctx) {
+		console.log('-------------------------------------------');
+		console.log('run view: ' + config.test)
+		return m("h1", ctx.val);
 	};
 
-	dashboard.appendTo = mexport.module(dashboard)
+	dashboard.appendTo = mexport(dashboard)
 
 	return dashboard
 }
 
-var container = document.createElement('div')
-document.body.appendChild(container)
-
 test('normal mode', function (t) {
-	var dashboard = Dashboard({
-		test:10
+
+	var container1 = document.createElement('div')
+	var container2 = document.createElement('div')
+	document.body.appendChild(container1)
+	document.body.appendChild(container2)
+
+	var dashboard1 = Dashboard({
+		test:'apple'
 	})
-	m.module(container, dashboard);
 
-	t.equal(container.querySelectorAll('h1').length, 1, 'one element rendered')
+	var dashboard2 = Dashboard({
+		test:'orange'
+	})
 
-  t.end()
+	m.startComputation()
+	m.module(container1, dashboard1);
+	dashboard2.appendTo(container2)
+	m.endComputation()
+	
+	t.equal(container1.querySelectorAll('h1').length, 1, 'one element rendered')
+	t.equal(container2.querySelectorAll('h1').length, 1, 'one element rendered')
+	t.equal(container1.querySelectorAll('h1')[0].innerHTML, 'apple', 'apple val')
+	t.end()
+
+  
 })
