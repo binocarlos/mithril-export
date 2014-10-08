@@ -4,7 +4,7 @@
   "description": "Append self contained mithril views to normal DOM elements",
   "main": "index.js",
   "scripts": {
-    "test": "browserify test.js | tape-run -b phantom"
+    "test": "browserify test.js | testling"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "browserify": "^6.0.3",
     "tape": "^3.0.0",
-    "tape-run": "^0.3.0"
+    "testling": "^1.7.1"
   },
   "dependencies": {
     "mithril": "^0.1.22"

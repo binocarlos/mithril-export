@@ -11,8 +11,6 @@ function Dashboard(config){
 	};
 
 	dashboard.view = function(ctx) {
-		console.log('-------------------------------------------');
-		console.log('run view: ' + config.test)
 		return m("h1", ctx.val);
 	};
 
