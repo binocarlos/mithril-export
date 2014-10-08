@@ -42,6 +42,7 @@ test('normal mode', function (t) {
 	t.equal(container1.querySelectorAll('h1').length, 1, 'one element rendered')
 	t.equal(container2.querySelectorAll('h1').length, 1, 'one element rendered')
 	t.equal(container1.querySelectorAll('h1')[0].innerHTML, 'apple', 'apple val')
+	t.equal(container2.querySelectorAll('h1')[0].innerHTML, 'orange', 'orange val')
 	t.end()
 
   
