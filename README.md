@@ -1,6 +1,8 @@
 mithril-export
 ==============
 
+[![Travis](http://img.shields.io/travis/binocarlos/mithril-export.svg?style=flat)](https://travis-ci.org/binocarlos/mithril-export)
+
 Append self contained [mithril](https://github.com/lhorie/mithril.js) views to normal DOM elements
 
 ## install
